@@ -13,10 +13,10 @@ void solve(int i,int j){
     solve(i,j-1);
     solve(i+1,j);
     solve(i,j+1);
-    solve(i-1,j-1);
-    solve(i+1,j+1);
-    solve(i-1,j+1);
-    solve(i+1,j-1);
+    // solve(i-1,j-1);
+    // solve(i+1,j+1);
+    // solve(i-1,j+1);
+    // solve(i+1,j-1);
 }
 int main(){
     scanf("%d%d",&n,&m);
@@ -33,6 +33,6 @@ int main(){
             }
         }
     }
-    printf("%d",ans);
+    printf("%d\n",ans);
     return 0;
 }
