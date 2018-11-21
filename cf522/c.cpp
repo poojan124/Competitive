@@ -36,101 +36,80 @@ ll modpow(ll a,ll b,ll m = MOD){
     }
     return res;
 }
+int dp[5][100000+5];
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     int n;
     cin>>n;
     int a[n+1];
-    pi max_ =  mp(0,-1);
-    for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++)
         cin>>a[i];
-        if(a[i]>max_.F)
-            max_ = mp(a[i],i);
-    }
-    assert(max_.S!=-1);
-    int ans[n+1];
-    bool flag= true;
-    int x = 5;
-    ans[max_.S]=5;
-    for(int i=max_.S+1;i<n;i++){
-        if(i==n-1){
-            if(a[i]>a[i-1])
-                x++;
-            else if(a[i-1]==a[i-1])
-                x = ((x==2)?3:2);
-            else
-                x--;
-        }
-        else{
-            if(a[i-1]==a[i]){
-                if(a[i]==a[i+1])
-                    x = ((x==2)?3:2);
-                else if(a[i+1]>a[i])
-                    x = ((x==1)?2:1);
-                else
-                    x = ((x==5)?4:5);
+    memset(dp,0,sizeof(dp));
+    for(int i=0;i<5;i++)
+        dp[i][0] = 1;
+    for(int i=1;i<n;i++){
+        for(int j=0;j<5;j++){
+            if(a[i]==a[i-1] && dp[j][i-1]){
+                for(int c=0;c<5;c++)
+                    if(c!=j)
+                        dp[c][i] = 1;
             }
-            else if(a[i]>a[i-1] && a[i]<=a[i+1])
-                x++;
-            else if(a[i]<a[i-1] && a[i]>=a[i+1])
-                x--;
-            else if(a[i]<a[i+1] && a[i]<a[i-1])
-                x = min(1,--x);
-            else if(a[i]>a[i+1] && a[i]>a[i-1])
-                x = min(5,++x);
-        }
-        if(x>0 && x<=5)
-            ans[i]=x;
-        else{
-            flag=false;
-            break;
-        }
-    }
-    x=5;
-    for(int i=max_.S-1;i>=0;i--){
-        if(i==0){
-            if(a[i+1]>a[i])
-                x--;
-            else if(a[i+1]<a[i])
-                x++;
-            else
-                x = ((x==2)?3:2);
-        }
-        else{
-            if(a[i+1]==a[i]){
-                if(a[i-1]==a[i])
-                    x = ((x==2)?3:2);
-                else if(a[i-1]>a[i])
-                    x = ((x==1)?2:1);
-                else
-                    x = ((x==5)?4:5);
+            if(a[i]>a[i-1] && dp[j][i-1]){
+                for(int c=j+1;c<5;c++)
+                    dp[c][i] = 1;
+                break;
             }
-            else if(a[i]>=a[i-1] && a[i]<a[i+1])
-                x--;
-            else if(a[i]<=a[i-1] && a[i]>a[i+1])
-                x++;
-            else if(a[i]<a[i+1] && a[i]<a[i-1]){
-                x = min(1,--x);
+            if(a[i]<a[i-1] && dp[j][i-1]){
+                for(int c=j-1;c>=0;c--)
+                    dp[c][i] = 1;
             }
-            else if(a[i]>a[i+1] && a[i]>a[i-1]){
-                x = max(5,++x);
-            }
-                
-        }
-        if(x>0 && x<=5)
-            ans[i]=x;
-        else{
-            flag=false;
-            break;
         }
     }
-    if(flag){
-        for(int i=0;i<n;i++)
-            cout<<ans[i]<<" ";
+    for(int i=0;i<5;i++){
+        for(int j=0;j<n;j++){
+            cout<<dp[i][j]<<" ";
+        }
+        cout<<endl;
     }
-    else{
-        cout<<"-1"<<endl;
+    int x=-1;    
+    for(int i=0;i<5;i++)
+        if(dp[i][n-1])x=i;
+    vector<int> v;
+    if(x!=-1){
+        v.pb(x);
+        for(int i=n-2;i>=0;i--){
+            if(a[i]==a[i+1]){
+                for(int j=0;j<5;j++){
+                    if(dp[j][i] && j!=x){
+                        x=j;
+                        break;
+                    }
+                }
+            }
+            if(a[i]>a[i+1]){
+                for(int j=x+1;j<5;j++){
+                    if(dp[j][i]){
+                        x=j;
+                        break;
+                    }
+                }
+            }
+            if(a[i]<a[i+1]){
+                for(int j=x-1;j>=0;j--){
+                    if(dp[j][i]){
+                        x=j;
+                        break;
+                    }
+                }
+            }
+            v.pb(x);
+        }
+        reverse(all(v));
+        for(auto i:v)
+            cout<<i+1<<" ";
     }
+    else
+        cout<<"-1";
     return 0;
 }
