@@ -39,30 +39,27 @@ ll modpow(ll a,ll b,ll m = MOD){
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    int n,k;
+    ll n,k;
     cin>>n>>k;
-    int a[105];
-    memset(a,0,sizeof(a));
+    ll a[n];
+    ll ans = 0;
     for(int i=0;i<n;i++){
-        int x;
-        cin>>x;
-        a[x]++;
+        cin>>a[i];
+        ans+=a[i];
     }
-    int max = 0;
-    for(int i=0;i<105;i++){
-        if(a[i]>max)
-            max =a[i];
+    sort(a,a+n,greater<ll>());
+    ll req  = a[0];
+    EACH(i,a){
+        if(i>=req){
+            ans--;
+            req--;
+        }
+        else{
+            ans -= (req-i+1);
+            req = i-1;
+        }
     }
-    int ans = 0;
-    if(max>k)
-        if(max%k!=0)
-            max += (k-max%k) ;
-    else{
-        max = k;
-    }
-    for(int i=0;i<105;i++)
-        if(a[i]>0)
-            ans+=(max-a[i]);
-    cout<<ans<<endl;
+    ans -= max((ll)0,req);
+    cout<<ans;
     return 0;
 }

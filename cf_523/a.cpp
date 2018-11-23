@@ -37,32 +37,11 @@ ll modpow(ll a,ll b,ll m = MOD){
     return res;
 }
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    int n,k;
+    // ios::sync_with_stdio(false);
+    // cin.tie(0);
+    ll n,k;
     cin>>n>>k;
-    int a[105];
-    memset(a,0,sizeof(a));
-    for(int i=0;i<n;i++){
-        int x;
-        cin>>x;
-        a[x]++;
-    }
-    int max = 0;
-    for(int i=0;i<105;i++){
-        if(a[i]>max)
-            max =a[i];
-    }
-    int ans = 0;
-    if(max>k)
-        if(max%k!=0)
-            max += (k-max%k) ;
-    else{
-        max = k;
-    }
-    for(int i=0;i<105;i++)
-        if(a[i]>0)
-            ans+=(max-a[i]);
-    cout<<ans<<endl;
+    // cout<<fixed<<k*1.0/n<<endl;
+    cout<<(int)(ceil(1.0*k/n)+1e-9);
     return 0;
 }
