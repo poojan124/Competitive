@@ -4,7 +4,8 @@
         "iostream": "cpp",
         "vector": "cpp",
         "iosfwd": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "unordered_map": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

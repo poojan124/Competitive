@@ -1,0 +1,16 @@
+Link : https://open.kattis.com/contests/c8ohow/problems
+A. Arriving on Time
+B. Knight's Marathon
+C. Political Development
+D. Manhattan Positioning System
+E. Treasure Diving
+F. Amsterdam Distance
+G. Black Out
+H. Friends
+I. Landline Telephone Network
+J. Lost in Translation (done) (3/5) (4/5)
+K. Coast Length (done) (2/5) (3/5)
+L. Pokemon Go Go 
+M. All Friends
+N. Islands (done) (1/5) (2/5)
+O. k-Colouring of a Graph
