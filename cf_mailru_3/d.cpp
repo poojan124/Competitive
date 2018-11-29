@@ -58,10 +58,8 @@ int dfs(int s){
         return 0;
     visi[s] = 1;
     int sum = 0;
-    trav(x,v[s]){
-        if(!visi[x])
-            sum += dfs(x) ;
-    }
+    trav(x,v[s])
+        sum += dfs(x) ;
     cntleaf.pb(sum);
     return sum;
 }
@@ -81,7 +79,9 @@ int main(){
     memset(visi,0,sizeof(visi));
     int xd = dfs(1);
     sort(all(cntleaf));
-    F0R(i,n-cntleaf.size())cout<<"1 ";
-    trav(i,cntleaf)cout<<i<<" ";
+    F0R(i,n-cntleaf.size())
+        cout<<"1 ";
+    trav(i,cntleaf)
+        cout<<i<<" ";
     return 0;
 }
