@@ -110,9 +110,5 @@ int main(){
         }
     }
     cout<<ans;
-    F0R(i,s.length())cnt[s[i]-'0']++;
-    if(cnt[0]>cnt[1]){
-        
-    }
     return 0;
 }
