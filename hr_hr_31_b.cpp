@@ -24,43 +24,47 @@ typedef pair<ll,ll> pl;
 #define pm(m) trav(x, m) cout << x.F << ":" << x.S << " "; cout << endl; //print map/lookup table
 
 const int MOD = 1000000007;
-bool cmp(ll x,ll y){
-    return x>y;
+bool cmp(ll a,ll b){
+    return a>b;
 }
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    int n,k;
+    ll n,k;
     cin>>n>>k;
-    vector<vector<ll>> v(100005);
-    F0R(i,n){
-        ll x,y;
-        cin>>x>>y;
-        v[x].pb(y);
-    }
-    FOR(i,1,k+1){
-        if(v[i].size()>1)
-            sort(all(v[i]),cmp);
-    }
-    vector<ll> smax(100005);
-    int max_size = 0;
-    trav(x,v){
-        int i=0;
-        ll csum = 0 ;
-        trav(xx,x){
-            csum+=xx;
-            if(csum>0)
-                smax[i] += csum;
-            else
-                break;
+    ll a[k];
+    F0R(i,k)cin>>a[i];
+    sort(a,a+k,cmp);
+    // pv(a);
+    if(n==k)
+        cout<<a[k-1];
+    else{
+        // cout<<"wegasfd"<<endl;
+        ll cur_cnt = 1;
+        double cur_values = a[n-1];
+        ll rem = 0;
+        int i = n;
+        while(i<k){
+            rem+=a[i];
             i++;
         }
+        int j = n-1;
+        while(j>0 && rem>0){
+            // cout<<"sdkf "<<j<<endl;
+            int diff = a[j-1] - a[j];
+            if(rem >diff*cur_cnt){
+                rem -= diff*cur_cnt;
+                cur_values = a[j-1];
+                cur_cnt++;
+            }else{
+                cur_values += rem/(double)cur_cnt;
+                rem = 0;
+            }
+            j--;
+        }
+        if(rem>0)
+            cur_values += rem/(double)cur_cnt;
+        cout<<fixed<<cur_values;
     }
-    if(smax.empty()){
-        cout<<0<<endl;
-        return 0;
-    }
-    ll best = 0;
-    cout<<*max_element(all(smax))<<endl;
     return 0;
 }

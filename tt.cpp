@@ -24,43 +24,33 @@ typedef pair<ll,ll> pl;
 #define pm(m) trav(x, m) cout << x.F << ":" << x.S << " "; cout << endl; //print map/lookup table
 
 const int MOD = 1000000007;
-bool cmp(ll x,ll y){
-    return x>y;
-}
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    int n,k;
-    cin>>n>>k;
-    vector<vector<ll>> v(100005);
-    F0R(i,n){
-        ll x,y;
-        cin>>x>>y;
-        v[x].pb(y);
-    }
-    FOR(i,1,k+1){
-        if(v[i].size()>1)
-            sort(all(v[i]),cmp);
-    }
-    vector<ll> smax(100005);
-    int max_size = 0;
-    trav(x,v){
-        int i=0;
-        ll csum = 0 ;
-        trav(xx,x){
-            csum+=xx;
-            if(csum>0)
-                smax[i] += csum;
-            else
-                break;
-            i++;
+    int n,m;
+    cin>>n>>m;
+    int a[n];
+    F0R(i,n)cin>>a[i];
+    while(m--){
+        int x,y,z;
+        cin>>x>>y>>z;
+        int min_ = INT_MAX;
+        x--;
+        FOR(i,x,y){
+            FOR(j,i,y){
+                int cur =0;
+                FOR(xx,i,j+1){
+                    if(a[xx]>(j-i+1))
+                        cur += a[xx]*(j-i+1); 
+                }
+                if(cur>=z){
+                    min_ = min(j-i+1,min_);
+                    break; 
+                }   
+            }
         }
+        cout<<min_<<endl;
     }
-    if(smax.empty()){
-        cout<<0<<endl;
-        return 0;
-    }
-    ll best = 0;
-    cout<<*max_element(all(smax))<<endl;
     return 0;
 }
