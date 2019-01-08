@@ -57,6 +57,8 @@ vector<ll> fac(ll n){
         v.pb(n);
     return v;
 }
+unordered_map<ll,pl> dp3,dp5;
+unordered_map<ll,bool> dp4;
 void solve(ll n){
     if(n==1 || dp1.find(n)!=dp1.end()){
         return;
@@ -64,46 +66,91 @@ void solve(ll n){
     //cout<<"Call for "<<n<<endl;
     vector<ll> v = fac(n);
     dp1[n] = c1 + (n-1)*c2;
-    dp2[n] = 1;
+    // dp2[n] = 1;
+    dp3[n] = {1,n};
     //cout<<"----------------------------\n";
     //pv(v);
     //cout<<"----------------------------\n";
     bool f = 0;
     trav(x,v){
-        //if(n==nn || 1)
-        cout<<x<<" -------------------------------------- "<<n<<endl;
+        // if(n==nn || 1)
+        // cout<<x<<" -------------------------------------- "<<n<<endl;
         ll ax  = x,ay = n/x;
         solve(ax);
         solve(ay);
         ll t = dp1[ax] + dp1[ay];
-        ll tc = dp2[ax]*dp2[ay];
+        // ll tc = dp2[ax]*dp2[ay];
         if(dp1[n] == t){
-        //    cout<<"here "<<n<<" "<<tc<<" "<<ax<<" "<<ay<<" "<<"\n";
+            // cout<<"here "<<n<<" "<<tc<<" "<<ax<<" "<<ay<<" "<<"\n";
+            dp4[n] = 1;
+            if(!f)
+                dp5[n] = {ax,ay};
+            // dp2[n] += tc;
             f = 1;
-            dp2[n] += tc;
-            //if(isp(ax,ay) && ax!=ay){
-            //    dp2[n] += tc;
-            //}
         }
         if(dp1[n]>t){
-          //  cout<<"NEVERRRRRR "<<n<<" "<<tc<<" "<<ax<<" "<<ay<<" "<<"\n";
+            // cout<<"NEVERRRRRR:::::::::: "<<n<<" "<<ax<<" "<<ay<<" "<<"\n";
             dp1[n] = t;
-            dp2[n] = tc;
-            //if(isp(ax,ay) && ax!=ay){
-            //    dp2[n] += tc;
-            //}
+            // dp2[n] = tc;
+            dp3[n] = {ax,ay};
+            dp4[n] = 0;
         }
     }
-    cout<<"For n : "<<n<<" "<<dp1[n]<<" "<<dp2[n]<<endl;
+    // cout<<"For n : "<<n<<" "<<dp1[n]<<" "<<dp2[n]<<endl;
 }
+void backtrace (ll n){
+    pl P = dp3[n];
+    if(P.F != 1 && P.S!= 2){
+        // cout<<"c1\n";
+        backtrace(P.F);
+        backtrace(P.S);
+    }
+    else{
+        // cout<<"c2\n";
+        if(dp4[n]==1){
+            pl PP = dp5[n];
+            backtrace(PP.F);
+            backtrace(PP.S);
+        }
+        dp2[P.F]++;
+        dp2[P.S]++;
+    }
+}
+ll binomialCoeff(ll n, ll k) { 
+    ll res = 1;
+    if ( k > n - k ) 
+        k = n - k; 
+    for (int i = 0; i < k; ++i) { 
+        res *= (n - i); 
+        res /= (i + 1); 
+    } 
+    return res; 
+} 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     cin>>nn>>c1>>c2;
     dp1[1] = 0;
-    dp2[1] = 1;
-    pv(fac(nn));
+    // pv(fac(nn));
     solve(nn);
-    cout<<dp1[nn]<<" "<<dp2[nn];
+    // cout<<dp3[nn].F<<" "<<dp3[nn].S<<"\n";
+    backtrace(nn);
+    // pm(dp2);
+    ll ans = dp2[nn];
+    ll lmao = 0;
+    vector<ll> lol;
+    trav(x,dp2){
+        if(x.F!=1 && x.F!=nn){
+            lmao += x.S;
+            lol.pb(x.S);
+        }
+    }
+    ll ans1 = 1;
+    trav(x,lol){
+        // cout<<" call "<<lmao<<" "<<x<<endl;
+        ans1 *= binomialCoeff(lmao,x);
+        lmao -= x;
+    }
+    cout<<dp1[nn]<<" "<<ans1+ans;
     return 0;
 }
