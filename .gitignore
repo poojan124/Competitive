@@ -7,4 +7,5 @@
 .rar
 .zip
 *.rar
-*.zip
+*.zip*/.vscode/*
+.vscode/
