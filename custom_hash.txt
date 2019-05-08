@@ -1,0 +1,5 @@
+4
+H 4 a b c d
+H 4 a b c e
+H 4 z w x y
+H 4 b e c g
