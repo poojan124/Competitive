@@ -1,3 +1,7 @@
+/**
+“Only those who have suffered long, can see the light within the shadows.”
+– Roronoa Zoro
+**/
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -28,6 +32,18 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-
+    int n;
+    string s;
+    cin >> n;
+    cin >> s;
+    int Z=0,N=0;
+    trav(x, s){
+        if(x=='z')Z++;
+        if(x=='n')N++;
+    }
+    F0R(i,N)
+        cout << "1 ";
+    F0R(i,Z)
+        cout << "0 ";
     return 0;
 }

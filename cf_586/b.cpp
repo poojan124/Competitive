@@ -28,6 +28,16 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-
+    int n;
+    cin >> n;
+    ll a[n][n];
+    F0R(i,n)
+        F0R(j,n)
+            cin >> a[i][j];
+    ll ans;
+    ans = sqrt((a[0][1] * a[0][2]) / a[1][2]);
+    cout << ans << " ";
+    FOR(i,1,n)
+       cout << a[0][i]/ans << " ";
     return 0;
 }

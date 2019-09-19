@@ -18,12 +18,13 @@ typedef pair<ll,ll> pl;
 #define F0R(i, a) for (int i = 0; i < (a); i++)
 #define FORd(i,a,b) for (int i = (b)-1; i >= (a); i--)
 #define F0Rd(i,a) for (int i = (a)-1; i >= 0; i--)
-#define SZ(a) (int)a.size()
+
 #define pv(v) trav(x, v) cout << x << " "; cout << endl; // print vector/array
 #define pvv(vv) trav(xx, vv){pv(xx);} // print 2-d vector/2-d array
 #define pm(m) trav(x, m) cout << x.F << ":" << x.S << " "; cout << endl; //print map/lookup table
 
 const int MOD = 1000000007;
+
 
 int main(){
     ios::sync_with_stdio(false);

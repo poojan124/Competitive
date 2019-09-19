@@ -25,9 +25,27 @@ typedef pair<ll,ll> pl;
 
 const int MOD = 1000000007;
 
+bool icomp(pair<int, pi> a, pair<int, pi> b){
+    return a.S.F < b.S.F;
+}
+bool dcomp(pair<int, pi> a, pair<int, pi> b){
+    return a.S.F > b.S.F;
+}
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-
+    int n;
+    cin >> n;
+    vector<pair<int,pi> > incr, decr;
+    int a,b;
+    F0R(i, n){
+        cin >> a >> b;
+        ((a < b)?incr:decr).push_back(mp(i+1, mp(a,b)));
+    }
+    auto &v = ((SZ(incr)> SZ(decr))?incr:decr);
+    auto &comp = ((SZ(incr)> SZ(decr))?dcomp:icomp);
+    sort(all(v), comp);
+    cout << SZ(v) << endl;
+    trav(x, v) cout << x.F << " ";
     return 0;
 }

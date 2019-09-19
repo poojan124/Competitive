@@ -28,6 +28,32 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-
+    int n;
+    cin >> n;
+    ll a[n];
+    map<ll,bool> m;
+    F0R(i,n){
+        cin >> a[i];
+        m[a[i]] = true;
+    }
+    vector<vector<ll> > v(64);
+    trav(x, a){
+        FOR(i,0,63){
+            ll p = pow(2, i);
+            if( x % p == 0 && (x/p)%2==1){
+                v[i].pb(x);
+            }
+        }
+    }
+    ll idx = 0;
+    F0R(i,63)
+        if(SZ(v[i]) > SZ(v[idx]))
+            idx = i;
+    cout << n - SZ(v[idx]) << endl;
+    map<ll,bool> tp;
+    trav(x, v[idx]) tp[x] = true;
+    trav(x, m)
+        if(!tp[x.F] && m[x.F])
+            cout << x.F << endl;
     return 0;
 }

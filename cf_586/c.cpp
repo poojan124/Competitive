@@ -28,6 +28,18 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-
+    string s;
+    cin >> s;
+    int n = SZ(s);
+    vector<char> min_left(n);
+    char min_so_far = s[0];
+    FOR(i,0,n){
+        if(i==0 || s[i]<=min_so_far){
+            cout << "Mike" << endl;
+            min_so_far = s[i];
+        }
+        else
+            cout << "Ann" << endl;
+    }
     return 0;
 }
