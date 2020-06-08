@@ -22,7 +22,7 @@ int main(){
             if(max_ > a[i])
                 ans = max(ans, max_ - a[i]);
             max_ = max(max_, a[i]);
-        }
+        }   
         cout << bitcount(ans) << endl;
     }
     return 0;
