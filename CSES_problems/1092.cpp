@@ -27,6 +27,39 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int n;
+    cin >> n;
+    int a = n;
+    int b = n+1;
+    if(a%2) swap(a,b);
+    a /= 2;
+    if(a%2){
+        cout << "NO";
+    }
+    else{
+        cout << "YES\n";
+        a /= 2;
+        if(n == b){
+            cout << 1 + 2*(a - 1) << endl;
+            cout << b << " ";
+            for(int i = 1; i <= a-1 ; i++){
+                cout << i << " " << b - i << " ";
+            }
+            cout << "\n" << n - (1 + 2*(a-1)) << endl;
+            for(int i = a; i <= n-a; i++){
+                cout << i << " ";
+            }
+        }
+        else{
+            cout << 2*a << endl;
+            for(int i = 1; i <= a ; i++){
+                cout << i << " " << b - i << " ";
+            }
+            cout << "\n" << n - 2*a << endl;
+            for(int i = a+1; i <= n-a; i++){
+                cout << i << " ";
+            }
+        }
+    }
     return 0;
 }

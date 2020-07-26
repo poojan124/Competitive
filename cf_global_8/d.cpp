@@ -27,6 +27,36 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int n;
+    cin >> n;
+    ll a[n];
+    F0R(i, n)
+        cin >> a[i];
+    ll ans = 0 ;
+    int bc[22];
+    memset(bc, 0, sizeof(bc));
+    for(auto x : a){
+        ll tmp = x;
+        int i = 0;
+        while(tmp){
+            bc[i] += tmp&1;
+            tmp >>= 1;
+            i++;
+        }
+    }
+    while(1){
+        ll n = 0;
+        for(int i=0;i<22;i++){
+            if(bc[i] > 0){
+                bc[i]--;
+                n |= (1 << i);
+            }
+        }
+        if(n==0){
+            break;
+        }
+        ans += (n*n);
+    }
+    cout << ans;
     return 0;
 }

@@ -24,9 +24,32 @@ typedef pair<ll,ll> pl;
 
 const int MOD = 1000000007;
 
+bool cmp(pi p1, pi p2){
+    return p1.S < p2.s;
+}
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int n,a,b;
+    cin >> n;
+    vector<pi> v;
+    F0R(i,n){
+        cin >> a >> b;
+        v.pb({1,a});
+        v.pb({2,b+1});
+    }
+    sort(v.begin(), v.end(), cmp);
+    deque<int> q;
+    int ans=0;
+    vector<int> av;
+    for(auto x : v){
+        if(x.F == 1){
+            if(q.empty()){
+                ans++;
+                q.push_back(ans);
+            }
+        }
+    }
     return 0;
 }

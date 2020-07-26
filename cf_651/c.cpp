@@ -23,10 +23,52 @@ typedef pair<ll,ll> pl;
 #define pm(m) trav(x, m) cout << x.F << ":" << x.S << " "; cout << endl; //print map/lookup table
 
 const int MOD = 1000000007;
+bool div(int n){
+    for(int i=1;i<=sqrt(n);i++){
+        if(n%i == 0){
+            if( ( (i&1) && (i != 1) ) || (n/i)&1 )return true;
+        }
+    }
+    return false;
+}
+bool check_odd_div(int n){
+    int cnt = 0;
+    while(n%2 == 0){
+        n/=2;
+    }
+    for (int i = 3; i <= sqrt(n); i = i + 2){  
+        while (n % i == 0)  {  
+            cnt++; 
+            n = n/i;  
+        }  
+    }  
+    if(n>1)
+        cnt++;
+    return cnt>1;
+}
+
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int t;
+    cin >> t;
+    while(t--){
+        int n;
+        cin >> n;
+        string p1 = "Ashishgup", p2 = "FastestFinger";
+        if(n==1){
+            cout << p2 << endl;
+        }
+        else if(n == 2){
+            cout << p1 << endl;
+        }
+        else if((n%2 == 0) && ((n/2)%2 == 1)){
+            cout << (check_odd_div(n)?p1:p2) << endl;
+        }
+        else{
+            cout << (div(n)?p1:p2) << endl;
+        }
+    }
     return 0;
 }

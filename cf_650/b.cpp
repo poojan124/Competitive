@@ -27,6 +27,23 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int t;
+    cin >> t;
+    while(t--){
+        int n;
+        cin >> n;
+        int a[n];
+        F0R(i, n) cin >> a[i];
+        int p0 = 0, p1 = 0;
+        F0R(i,n){
+            (i%2?p1:p0) += (i%2 != a[i]%2);
+        }
+        if(p0 != p1){
+            cout << -1 << endl;
+        }
+        else{
+            cout << p0 << endl;
+        }
+    }
     return 0;
 }

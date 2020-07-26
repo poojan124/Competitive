@@ -27,6 +27,20 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int n;
+    cin >> n;
+    ll a[n];
+    F0R(i,n) cin >> a[i];
+    ll prev = a[0];
+    ll ans = 0;
+    for(ll x : a){
+        if(x <= prev){
+            ans += (prev - x);
+        }
+        else{
+            prev = x;
+        }
+    }
+    cout << ans;
     return 0;
 }

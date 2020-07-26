@@ -27,6 +27,43 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int t;
+    cin >> t;
+    while(t--){
+        int x,n;
+        cin >> n;
+        vector<int> e,o;
+        int e_cnt = 0, o_cnt = 0;
+        for(int i=0;i<2*n;i++){
+            cin >> x;
+            if(x%2){
+                o.pb(i+1);
+                o_cnt++;
+            }
+            else{
+                e.pb(i+1);
+                e_cnt++;
+            }
+        }
+        if(o_cnt % 2){
+            o.pop_back();
+            e.pop_back();
+        }
+        else{
+            if(o.size()==0){
+                e.pop_back();
+                e.pop_back();
+            }
+            else{
+                o.pop_back();
+                o.pop_back();
+            }
+        }
+        for(int i = 0 ; i < o.size() ; i +=2 )
+            cout << o[i] << " " << o[i+1] << endl;
+        for(int i = 0 ; i < e.size() ; i +=2 )
+            cout << e[i] << " " << e[i+1] << endl;
+        
+    }
     return 0;
 }

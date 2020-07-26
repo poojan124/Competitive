@@ -27,6 +27,21 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    string s;
+    cin >> s;
+    s += '#';
+    int cnt=0, ans=0;
+    char prev = s[0];
+    for(auto x : s){
+        if(x != prev){
+            ans = max(ans, cnt);
+            cnt = 1;
+        }
+        else{
+            cnt++;
+        }
+        prev = x;
+    }
+    cout << ans;
     return 0;
 }

@@ -26,7 +26,15 @@ const int MOD = 1000000007;
 
 int main(){
     ios::sync_with_stdio(false);
-    cin.tie(0);
-    
+    cin.tie(0); 
+    int t;
+    cin >> t;
+    while(t--){
+        int n;
+        cin >> n;
+        int a[n];
+        F0R(i, n) cin >> a[i];
+        cout << ((a[0] < a[n-1])?"YES":"NO") << endl;
+    }
     return 0;
 }

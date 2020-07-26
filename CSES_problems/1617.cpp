@@ -24,9 +24,24 @@ typedef pair<ll,ll> pl;
 
 const int MOD = 1000000007;
 
+ll modpow(ll a, ll b){
+    ll res = 1;
+    while(b > 0){
+        if(b&1){
+            res = (res * a) % MOD;
+        }
+        b >>= 1;
+        a = (a*a)%MOD;
+    }
+    return res;
+}
+
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    ll n;
+    cin >> n;
+    cout << modpow(2,n);
     return 0;
 }

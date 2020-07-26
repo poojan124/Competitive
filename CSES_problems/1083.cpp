@@ -27,6 +27,13 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    ll n, x, sum=0;
+    cin >> n;
+    FOR(i,0,n-1){
+        cin >> x;
+        sum += x;
+    }
+    cout << (n*(n+1))/2 - sum;
     return 0;
+
 }

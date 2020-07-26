@@ -27,6 +27,19 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int t;
+    cin >> t;
+    while(t--){
+        ll a, b, n;
+        cin >> a >> b >> n;
+        if(a>b) swap(a,b);
+        int ans = 0;
+        while(a<=n && b<=n){
+            a += b;
+            ans++;
+            swap(a,b);
+        }
+        cout << ans << endl;
+    }
     return 0;
 }

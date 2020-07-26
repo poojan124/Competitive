@@ -14,7 +14,9 @@ int main(){
         else{
             int ans = min(n/k, m);
             m = max(0, m-(n/k));
-            cout << (m?(ans - (m+k-2)/(k-1)):0) << endl;
+            if(m == 0){
+                
+            }
         }
         
     }

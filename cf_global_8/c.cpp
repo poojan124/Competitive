@@ -27,6 +27,17 @@ const int MOD = 1000000007;
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int n;
+    cin >> n;
+    cout << 7 + (n-1)*3 << endl;
+    cout << "0 0\n0 1\n1 0\n1 1\n1 2\n2 1\n2 2\n";
+    n--;
+    int i = 2, j = 2;
+    while(n--){
+        cout << i+1 << " " << j << endl;
+        cout << i << " " << j+1 << endl;
+        cout << i+1 << " " << j+1 << endl;
+        i++;j++;
+    }
     return 0;
 }

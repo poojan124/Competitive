@@ -25,8 +25,27 @@ typedef pair<ll,ll> pl;
 const int MOD = 1000000007;
 
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    
+
+    ifstream infile("b.inp1.txt");
+    ofstream opfile("b.op1.txt");
+    int t;
+    infile >> t;
+    FOR(T,1,t+1){
+        int n;
+        infile >> n;
+        int c1 = 0, c2 = 0;
+        char x;
+        F0R(i,n){
+            infile >> x;
+            (x=='A'?c1:c2)++;
+        }
+        opfile << "Case #" << T << ": "; 
+        if(abs(c1-c2) > 1){
+            opfile << "N" << endl;
+        }
+        else{
+            opfile <<"Y" << endl;
+        }
+    }
     return 0;
 }
