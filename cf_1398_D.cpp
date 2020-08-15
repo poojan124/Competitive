@@ -24,14 +24,6 @@ typedef pair<ll,ll> pl;
 
 const int MOD = 1000000007;
 
-bool cmp(int a, int b){
-    return a > b;
-}
-
-bool cmp2(pair<int, int> a, pair<int, int> b){
-    return a.F > b.F;
-}
-
 /*
     i am so dumb missed this fking simple case:
     1 1 2
@@ -42,34 +34,54 @@ bool cmp2(pair<int, int> a, pair<int, int> b){
     Answer is fking 4*3 + 4*3. So greedy wont work you dumb fuck.
 */
 
+
+bool cmp(int a, int b){
+    return a > b;
+}
+
+int dp[201][201][201];
+vector<int> R(201), G(201), B(201);
+int r,g,b;
+int foo(int i, int j, int k){
+    if(dp[i][j][k] != -1){
+        return dp[i][j][k];    
+    }
+    int check = (i>=r) + (j>=g) + (k>=b);
+    if(check >= 2){
+        dp[i][j][k] = 0;
+    }
+    else{
+        if(check == 1){
+            if(i >= r) dp[i][j][k] = (G[j] * B[k]) + foo(i, j+1, k+1);
+            if(j >= g) dp[i][j][k] = (R[i] * B[k]) + foo(i+1, j, k+1);
+            if(k >= b) dp[i][j][k] = (R[i] * G[j]) + foo(i+1, j+1, k);
+        }
+        else{
+            int p=0, q=0, r=0;
+            p = (G[j] * B[k]) + foo(i, j+1, k+1);
+            q = (R[i] * B[k]) + foo(i+1, j, k+1);
+            r = (R[i] * G[j]) + foo(i+1, j+1, k);
+            dp[i][j][k] = max(p, max(q, r));
+        }        
+    }
+    return dp[i][j][k];
+
+}
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    int r,g,b;
     cin >> r >> g >> b;
-    vector<int> R(r), G(g), B(b);
     F0R(i, r) cin >> R[i];
     F0R(i, g) cin >> G[i];
     F0R(i, b) cin >> B[i];
     sort(R.begin(), R.end(), cmp);
     sort(G.begin(), G.end(), cmp);
     sort(B.begin(), B.end(), cmp);
-    ll ans = 0;
-    int i=0,j=0,k=0;
-    while(true){
-        vector<pair<int, int>> v;
-        if(i < r) v.pb({R[i], 0});
-        if(j < g) v.pb({G[j], 1});
-        if(k < b) v.pb({B[k], 2});
-        if(v.size() <= 1) break;
-        sort(v.begin(), v.end(), cmp2);
-        cout << v[0].F << " " << v[1].F << " " << v[2].F << endl;
-        ans += v[0].F * v[1].F;
-        i += ((v[0].S == 0) | (v[1].S == 0));
-        j += ((v[0].S == 1) | (v[1].S == 1));
-        k += ((v[0].S == 2) | (v[1].S == 2));
-        cout << i << " " << j << " " << k << " " << ans << endl;
-    }
-    cout << ans;
+    F0R(i, r+1)
+        F0R(j, g+1)
+            F0R(k, b+1)
+                dp[i][j][k] = -1;
+    cout << foo(0,0,0);
     return 0;
 }
