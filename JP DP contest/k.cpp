@@ -23,29 +23,29 @@ typedef pair<ll,ll> pl;
 #define pm(m) trav(x, m) cout << x.F << ":" << x.S << " "; cout << endl; //print map/lookup table
 
 const int MOD = 1000000007;
-ll dp[3005][3005];
-ll solve(ll i, ll j, vector<ll> &v, bool flag){
-    if(i==j) return flag?v[i]:0;
-    if(dp[i][j] != 0)return dp[i][j];
-    if(flag){
-        dp[i][j]  = max(solve(i+1, j, v, !flag) + v[i], solve(i, j-1, v, !flag) + v[j]);
+
+// at the end of the day its still about who you first want to share your good news with.
+// And not everyone is lucky to have someone like this. So if you got one respect that.
+bool dp[100005];
+
+bool solve(int n, int k, vector<int> &v, bool flag){
+    bool ok = false;
+    for(auto x : v){
+        ok &= solve(n, k-x, v, !flag);
     }
-    else{
-        dp[i][j]  = min(solve(i+1, j, v, !flag) , solve(i, j-1, v, !flag));
-    }
-    return dp[i][j];
+    
+    return !ok;
 }
+
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     memset(dp, 0, sizeof(dp));
-    ll n;
-    cin >> n;
-    vector<ll> v(n);
+    int n,k;
+    cin >> n >> k;
+    vector<int> v(n);
     F0R(i, n) cin >> v[i];
-    ll sum = 0, ret = solve(0, n-1, v, true); 
-    F0R(i, n) sum += v[i];
-    cout << 2*ret - sum;
+    cout << (solve(n, k, v)?"First":"Second");
     return 0;
 }

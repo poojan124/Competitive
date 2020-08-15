@@ -23,29 +23,19 @@ typedef pair<ll,ll> pl;
 #define pm(m) trav(x, m) cout << x.F << ":" << x.S << " "; cout << endl; //print map/lookup table
 
 const int MOD = 1000000007;
-ll dp[3005][3005];
-ll solve(ll i, ll j, vector<ll> &v, bool flag){
-    if(i==j) return flag?v[i]:0;
-    if(dp[i][j] != 0)return dp[i][j];
-    if(flag){
-        dp[i][j]  = max(solve(i+1, j, v, !flag) + v[i], solve(i, j-1, v, !flag) + v[j]);
-    }
-    else{
-        dp[i][j]  = min(solve(i+1, j, v, !flag) , solve(i, j-1, v, !flag));
-    }
-    return dp[i][j];
-}
+
+void 
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    memset(dp, 0, sizeof(dp));
-    ll n;
-    cin >> n;
-    vector<ll> v(n);
-    F0R(i, n) cin >> v[i];
-    ll sum = 0, ret = solve(0, n-1, v, true); 
-    F0R(i, n) sum += v[i];
-    cout << 2*ret - sum;
+    int t;
+    cin >> t;
+    while(t--){
+        int n;
+        cin >> n;
+        vector<int> v;
+        F0R(i, n) cin >> v[i];
+    }   
     return 0;
 }
