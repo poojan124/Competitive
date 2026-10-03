@@ -8,4 +8,7 @@
 .zip
 *.rar
 *.zip*/.vscode/*
-.vscode/
+*.ilk
+*.obj
+*.pdb
+
